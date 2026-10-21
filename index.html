@@ -710,7 +710,7 @@ small { color:var(--muted); }
   // ---------- phone location ----------
   var gpsWatch = null, meRing = null, meDot = null, gpsBtn = document.getElementById('gpsBtn');
   var secure = location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-  if (navigator.geolocation && secure) gpsBtn.hidden = false;
+  if (navigator.geolocation && secure && !(window.claude && window.claude.use)) gpsBtn.hidden = false; // not inside Claude, which refuses location
   function showMe(pos) {
     var p = px(pos.coords.latitude, pos.coords.longitude);
     var acc = (pos.coords.accuracy || 20) / 111320 * S;  // metres to map units
